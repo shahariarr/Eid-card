@@ -129,21 +129,51 @@ $(document).ready(function() {
         $btn.html('<span>⏳</span> প্রস্তুত হচ্ছে...');
 
         try {
-            // Get the original image source
+            // Get original image for dimensions
             const originalImage = document.getElementById('templateImage');
-            const imageSrc = originalImage.src;
+            const width = originalImage.naturalWidth;
+            const height = originalImage.naturalHeight;
 
-            // Create download link
-            const link = document.createElement('a');
-            link.download = 'eid-card.png';
-            link.href = imageSrc;
-            
-            // Trigger download
-            link.click();
-            
-            // Reset button state
-            $btn.prop('disabled', false);
-            $btn.html('<span>📥</span> ডাউনলোড');
+            // Create canvas with original dimensions
+            html2canvas(document.querySelector('.card-container'), {
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null,
+                width: width,
+                height: height,
+                scale: 1,
+                imageTimeout: 0,
+                onclone: function(clonedDoc) {
+                    // Ensure text positioning matches display
+                    const clonedContainer = clonedDoc.querySelector('.card-container');
+                    const clonedName = clonedDoc.querySelector('#displayName');
+                    const clonedNote = clonedDoc.querySelector('#displayNote');
+                    
+                    // Maintain text styles
+                    clonedContainer.style.width = width + 'px';
+                    clonedContainer.style.height = height + 'px';
+                    
+                    // Apply current template colors
+                    const template = templates[currentTemplate];
+                    clonedName.style.color = template.textColor;
+                    clonedNote.style.color = template.noteColor;
+                }
+            }).then(function(canvas) {
+                // Convert to high quality PNG
+                const dataUrl = canvas.toDataURL('image/png', 1.0);
+                
+                // Create download link
+                const link = document.createElement('a');
+                link.download = 'eid-card.png';
+                link.href = dataUrl;
+                
+                // Trigger download
+                link.click();
+                
+                // Reset button state
+                $btn.prop('disabled', false);
+                $btn.html('<span>📥</span> ডাউনলোড');
+            });
         } catch (error) {
             console.error('Error:', error);
             alert('দুঃখিত, ডাউনলোড করা যায়নি। আবার চেষ্টা করুন।');
