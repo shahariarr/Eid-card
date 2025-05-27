@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ঈদ কার্ড জেনারেটর</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card-generator">
+            <!-- Main Card Preview -->
+            <div class="card-preview">
+                <div class="card-container" id="cardContainer">
+                    <img id="templateImage" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eid-card-1-1748331248649-ewPpDkjpSofyOYNQSkjjsMnuRkgrUZ.png" alt="Template">
+                    <div class="text-overlay">
+                        <div class="user-name" id="displayName"></div>
+                        <div class="user-note" id="displayNote"></div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button class="nav-btn prev-btn" id="prevBtn">‹</button>
+                <button class="nav-btn next-btn" id="nextBtn">›</button>
+            </div>
+
+            <!-- Template Selection -->
+            <div class="template-section">
+                <h3>টেমপ্লেট:</h3>
+                <div class="template-grid">
+                    <div class="template-item active" data-template="0">
+                        <img src="img/v1.jpg" alt="ক্লাসিক সাদা">
+                    </div>
+                    <div class="template-item" data-template="1">
+                        <img src="img/v2.jpg" alt="মডার্ন বেইজ">
+                    </div>
+                    <div class="template-item" data-template="2">
+                        <img src="img/v3.jpg" alt="সবুজ গ্রাডিয়েন্ট">
+                    </div>
+                    <div class="template-item" data-template="3">
+                        <img src="img/v4.jpg" alt="নীল টেমপ্লেট">
+                    </div>
+                    <div class="template-item" data-template="4">
+                        <img src="img/v5.jpg" alt="টেমপ্লেট ৫">
+                    </div>
+                    <div class="template-item" data-template="5">
+                        <img src="img/v6.jpg" alt="টেমপ্লেট ৬">
+                    </div>
+                    <div class="template-item" data-template="6">
+                        <img src="img/v7.jpg" alt="টেমপ্লেট ৭">
+                    </div>
+                    <div class="template-item" data-template="7">
+                        <img src="img/v8.jpg" alt="টেমপ্লেট ৮">
+                    </div>
+                    <div class="template-item" data-template="8">
+                        <img src="img/v9.jpg" alt="টেমপ্লেট ৯">
+                    </div>
+                    <div class="template-item" data-template="9">
+                        <img src="img/v10.jpg" alt="টেমপ্লেট ১০">
+                    </div>
+                    <div class="template-item" data-template="10">
+                        <img src="img/v11.jpg" alt="টেমপ্লেট ১১">
+                    </div>
+                    <div class="template-item" data-template="11">
+                        <img src="img/v12.jpg" alt="টেমপ্লেট ১২">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Fields -->
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="userName">আপনার নাম:</label>
+                    <textarea id="userName" placeholder="আপনার নাম লিখুন" rows="2"></textarea>
+                    <small>নতুন লাইনের জন্য enter চাপুন এবং লিখুন</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="userNote">আপনার নোট:</label>
+                    <input type="text" id="userNote" placeholder="আপনার নোট লিখুন">
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn download-btn" id="downloadBtn">
+                    <span>📥</span> ডাউনলোড
+                </button>
+                <button class="btn share-btn" id="shareBtn">
+                    <span>📤</span> শেয়ার
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p>ঈদ কার্ড জেনারেটর</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
