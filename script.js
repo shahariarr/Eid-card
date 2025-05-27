@@ -5,8 +5,8 @@ $(document).ready(function() {
             id: 0,
             name: 'ক্লাসিক সাদা',
             image: 'img/v1.jpg',
-            textColor: '#05522C',
-            noteColor: '#066B38'
+            textColor: '#f2a41e',
+            noteColor: '#f2a41e'
         },
         {
             id: 1, 
@@ -19,71 +19,71 @@ $(document).ready(function() {
             id: 2,
             name: 'সবুজ গ্রাডিয়েন্ট', 
             image: 'img/v3.jpg',
-            textColor: '#E8F5E9',
-            noteColor: '#FFFFFF'
+            textColor: '#052941',
+            noteColor: '#052941'
         },
         {
             id: 3,
             name: 'নীল টেমপ্লেট',
             image: 'img/v4.jpg', 
-            textColor: '#E3F2FD',
-            noteColor: '#FFFFFF'
+            textColor: '#052941',
+            noteColor: '#052941'
         },
         {
             id: 4,
             name: 'টেমপ্লেট ৫',
             image: 'img/v5.jpg',
-            textColor: '#FFFFFF',
-            noteColor: '#E3F2FD'
+            textColor: '#f7d512',
+            noteColor: '#f7d512'
         },
         {
             id: 5,
             name: 'টেমপ্লেট ৬',
             image: 'img/v6.jpg',
-            textColor: '#05522C',
-            noteColor: '#066B38'
+            textColor: '#714d29',
+            noteColor: '#714d29'
         },
         {
             id: 6,
             name: 'টেমপ্লেট ৭',
             image: 'img/v7.jpg',
-            textColor: '#FFFFFF',
-            noteColor: '#E3F2FD'
+            textColor: '#fcc510',
+            noteColor: '#fcc510'
         },
         {
             id: 7,
             name: 'টেমপ্লেট ৮',
             image: 'img/v8.jpg',
-            textColor: '#05522C',
-            noteColor: '#066B38'
+            textColor: '#6c9494',
+            noteColor: '#6c9494'
         },
         {
             id: 8,
             name: 'টেমপ্লেট ৯',
             image: 'img/v9.jpg',
-            textColor: '#FFFFFF',
-            noteColor: '#E3F2FD'
+            textColor: '#292560',
+            noteColor: '#292560'
         },
         {
             id: 9,
             name: 'টেমপ্লেট ১০',
             image: 'img/v10.jpg',
-            textColor: '#05522C',
-            noteColor: '#066B38'
+            textColor: '#fac213',
+            noteColor: '#fac213'
         },
         {
             id: 10,
             name: 'টেমপ্লেট ১১',
             image: 'img/v11.jpg',
-            textColor: '#FFFFFF',
-            noteColor: '#E3F2FD'
+            textColor: '#671f13',
+            noteColor: '#671f13'
         },
         {
             id: 11,
             name: 'টেমপ্লেট ১২',
             image: 'img/v12.jpg',
-            textColor: '#05522C',
-            noteColor: '#066B38'
+            textColor: '#f8c422',
+            noteColor: '#f8c422'
         }
     ];
 
@@ -164,24 +164,18 @@ $(document).ready(function() {
                 $('#cardContainer').css('background', 'none');
             }
 
-            // Add text shadow based on text color
-            const textShadow = template.textColor === '#FFFFFF' || 
-                             template.textColor.startsWith('#E') ? 
-                             '1px 1px 3px rgba(0,0,0,0.5)' :     // Dark shadow for light text
-                             '1px 1px 3px rgba(255,255,255,0.5)'; // Light shadow for dark text
-
             $('#displayName')
                 .text(userName)
                 .css({
                     'color': template.textColor,
-                    'text-shadow': textShadow
+                    'text-shadow': 'none'  // Remove text shadow
                 });
 
             $('#displayNote')
                 .text(userNote)
                 .css({
                     'color': template.noteColor,
-                    'text-shadow': textShadow
+                    'text-shadow': 'none'  // Remove text shadow
                 });
 
             // Fade in
