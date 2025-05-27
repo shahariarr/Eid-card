@@ -123,8 +123,35 @@ $(document).ready(function() {
 
     // Download button
     $('#downloadBtn').click(function() {
-        // For a complete implementation, you would use html2canvas or similar library
-        alert('ডাউনলোড ফিচার শীঘ্রই আসছে! \n\nএই ফিচারের জন্য html2canvas লাইব্রেরি প্রয়োজন।');
+        // Show loading state
+        const $btn = $(this);
+        $btn.prop('disabled', true);
+        $btn.html('<span>⏳</span> প্রস্তুত হচ্ছে...');
+
+        try {
+            // Get the original image source
+            const originalImage = document.getElementById('templateImage');
+            const imageSrc = originalImage.src;
+
+            // Create download link
+            const link = document.createElement('a');
+            link.download = 'eid-card.png';
+            link.href = imageSrc;
+            
+            // Trigger download
+            link.click();
+            
+            // Reset button state
+            $btn.prop('disabled', false);
+            $btn.html('<span>📥</span> ডাউনলোড');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('দুঃখিত, ডাউনলোড করা যায়নি। আবার চেষ্টা করুন।');
+            
+            // Reset button state
+            $btn.prop('disabled', false);
+            $btn.html('<span>📥</span> ডাউনলোড');
+        }
     });
 
     // Share button
