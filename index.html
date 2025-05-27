@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <!-- Add New Header Section -->
@@ -24,13 +26,15 @@
             <!-- Main Card Preview -->
             <div class="card-preview">
                 <div class="card-container" id="cardContainer">
-                    <img id="templateImage" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eid-card-1-1748331248649-ewPpDkjpSofyOYNQSkjjsMnuRkgrUZ.png" alt="Template">
+                    <img id="templateImage"
+                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eid-card-1-1748331248649-ewPpDkjpSofyOYNQSkjjsMnuRkgrUZ.png"
+                        alt="Template">
                     <div class="text-overlay">
                         <div class="user-name" id="displayName"></div>
                         <div class="user-note" id="displayNote"></div>
                     </div>
                 </div>
-                
+
                 <!-- Navigation Arrows -->
                 <button class="nav-btn prev-btn" id="prevBtn">‹</button>
                 <button class="nav-btn next-btn" id="nextBtn">›</button>
@@ -83,13 +87,15 @@
             <div class="input-section">
                 <div class="input-group">
                     <label for="userName">আপনার নাম:</label>
-                    <textarea id="userName" placeholder="আপনার নাম লিখুন" rows="2"></textarea>
-                    <small>নতুন লাইনের জন্য enter চাপুন এবং লিখুন</small>
+                    <input type="text" id="userName" placeholder="আপনার নাম লিখুন">
                 </div>
 
                 <div class="input-group">
                     <label for="userNote">আপনার নোট:</label>
-                    <input type="text" id="userNote" placeholder="আপনার নোট লিখুন">
+                    <textarea id="userNote" placeholder="আপনার নোট লিখুন" rows="2"></textarea>
+                    <small>নতুন লাইনের জন্য enter চাপুন এবং লিখুন</small>
+
+
                 </div>
             </div>
 
@@ -112,4 +118,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
