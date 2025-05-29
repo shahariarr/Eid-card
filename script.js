@@ -327,8 +327,8 @@ $(document).ready(function() {
         try {
             // Get original image for dimensions
             const originalImage = document.getElementById('templateImage');
-            const width = originalImage.naturalWidth;
-            const height = originalImage.naturalHeight;
+            const width = 360;
+            const height = 400;
 
             // Create canvas with original dimensions
             html2canvas(document.querySelector('.card-container'), {
