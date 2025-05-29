@@ -313,39 +313,82 @@ body {
 }
 
 .btn {
-    flex: 1;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Ekushey Aloucik 16-11-2018', 'Noto Sans Bengali', 'Kalpurush', 'SolaimanLipi', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.5s;
+}
+
+.btn:active::after {
+    transform: scale(0, 0);
+    opacity: 0.3;
+    transition: 0s;
+}
+
+.btn-icon {
+    font-size: 1.25rem;
+}
+
+/* Download button style */
 .download-btn {
-    background: #374151;
+    background: linear-gradient(135deg, #34b7a7 0%, #2a9d8f 100%);
     color: white;
 }
 
 .download-btn:hover {
-    background: #1f2937;
+    background: linear-gradient(135deg, #2a9d8f 0%, #208b7f 100%);
     transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(42, 157, 143, 0.2);
 }
 
+/* Share button style */
 .share-btn {
-    background: #3b82f6;
+    background: linear-gradient(135deg, #ff9e6d 0%, #ff7e3d 100%);
     color: white;
 }
 
 .share-btn:hover {
-    background: #2563eb;
+    background: linear-gradient(135deg, #ff7e3d 0%, #ff6321 100%);
     transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 126, 61, 0.2);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 /* Footer */
@@ -394,6 +437,31 @@ body {
     .action-buttons {
         flex-direction: column;
     }
+}
+
+/* Responsive layout for desktop */
+@media (min-width: 992px) {
+  .card-generator-columns {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  
+  .column-left {
+    flex: 1;
+  }
+  
+  .column-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+  
+  .input-section {
+    margin-bottom: 2rem;
+  }
 }
 
 /* Touch feedback */

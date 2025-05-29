@@ -23,116 +23,135 @@
         </header>
 
         <div class="card-generator">
-            <!-- Main Card Preview -->
-            <div class="card-preview">
-                <div class="card-container" id="cardContainer">
-                    <img id="templateImage"
-                        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eid-card-1-1748331248649-ewPpDkjpSofyOYNQSkjjsMnuRkgrUZ.png"
-                        alt="Template">
-                    <div class="text-overlay">
-                        <div class="user-name" id="displayName"></div>
-                        <div class="user-note" id="displayNote"></div>
-                    </div>
-                </div>
-
-                <!-- Navigation Arrows -->
-                <button class="nav-btn prev-btn" id="prevBtn">‹</button>
-                <button class="nav-btn next-btn" id="nextBtn">›</button>
-            </div>
-
-            <!-- Template Selection -->
-            <div class="template-section">
-                <h3>টেমপ্লেট:</h3>
-                <div class="template-grid">
-                    <div class="template-item active" data-template="0">
-                        <img src="img/v1.jpg" alt="ক্লাসিক সাদা">
-                    </div>
-                    <div class="template-item" data-template="1">
-                        <img src="img/v2.jpg" alt="মডার্ন বেইজ">
-                    </div>
-                    <div class="template-item" data-template="2">
-                        <img src="img/v3.jpg" alt="সবুজ গ্রাডিয়েন্ট">
-                    </div>
-                    <div class="template-item" data-template="3">
-                        <img src="img/v4.jpg" alt="নীল টেমপ্লেট">
-                    </div>
-                    <div class="template-item" data-template="4">
-                        <img src="img/v5.jpg" alt="টেমপ্লেট ৫">
-                    </div>
-                    <div class="template-item" data-template="5">
-                        <img src="img/v6.jpg" alt="টেমপ্লেট ৬">
-                    </div>
-                    <div class="template-item" data-template="6">
-                        <img src="img/v7.jpg" alt="টেমপ্লেট ৭">
-                    </div>
-                    <div class="template-item" data-template="7">
-                        <img src="img/v8.jpg" alt="টেমপ্লেট ৮">
-                    </div>
-                    <div class="template-item" data-template="8">
-                        <img src="img/v9.jpg" alt="টেমপ্লেট ৯">
-                    </div>
-                    <div class="template-item" data-template="9">
-                        <img src="img/v10.jpg" alt="টেমপ্লেট ১০">
-                    </div>
-                    <div class="template-item" data-template="10">
-                        <img src="img/v11.jpg" alt="টেমপ্লেট ১১">
-                    </div>
-                    <div class="template-item" data-template="11">
-                        <img src="img/v12.jpg" alt="টেমপ্লেট ১২">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Input Fields -->
-            <div class="input-section">
-                <div class="input-group">
-                    <label for="userName">আপনার নাম:</label>
-                    <input type="text" id="userName" placeholder="আপনার নাম লিখুন">
-                    
-                    <!-- Text Customization Controls for Name -->
-                    <div class="text-customization">
-                        <div class="position-controls">
-                            <button type="button" class="position-btn" data-target="name" data-direction="up">⬆️</button>
-                            <button type="button" class="position-btn" data-target="name" data-direction="down">⬇️</button>
-                            <button type="button" class="position-btn" data-target="name" data-direction="left">⬅️</button>
-                            <button type="button" class="position-btn" data-target="name" data-direction="right">➡️</button>
+            <!-- Wrap content in flex containers for desktop layout -->
+            <div class="card-generator-columns">
+                <!-- LEFT COLUMN: Preview and Templates -->
+                <div class="column-left">
+                    <!-- Main Card Preview -->
+                    <div class="card-preview">
+                        <div class="card-container" id="cardContainer">
+                            <img id="templateImage"
+                                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/eid-card-1-1748331248649-ewPpDkjpSofyOYNQSkjjsMnuRkgrUZ.png"
+                                alt="Template">
+                            <div class="text-overlay">
+                                <div class="user-name" id="displayName"></div>
+                                <div class="user-note" id="displayNote"></div>
+                            </div>
                         </div>
-                        <div class="size-controls">
-                            <button type="button" class="size-btn" data-target="name" data-action="decrease">🔍-</button>
-                            <button type="button" class="size-btn" data-target="name" data-action="increase">🔍+</button>
+
+                        <!-- Navigation Arrows -->
+                        <button class="nav-btn prev-btn" id="prevBtn">‹</button>
+                        <button class="nav-btn next-btn" id="nextBtn">›</button>
+                    </div>
+
+                    <!-- Template Selection -->
+                    <div class="template-section">
+                        <h3>টেমপ্লেট:</h3>
+                        <div class="template-grid">
+                            <div class="template-item active" data-template="0">
+                                <img src="img/v1.jpg" alt="ক্লাসিক সাদা">
+                            </div>
+                            <div class="template-item" data-template="1">
+                                <img src="img/v2.jpg" alt="মডার্ন বেইজ">
+                            </div>
+                            <div class="template-item" data-template="2">
+                                <img src="img/v3.jpg" alt="সবুজ গ্রাডিয়েন্ট">
+                            </div>
+                            <div class="template-item" data-template="3">
+                                <img src="img/v4.jpg" alt="নীল টেমপ্লেট">
+                            </div>
+                            <div class="template-item" data-template="4">
+                                <img src="img/v5.jpg" alt="টেমপ্লেট ৫">
+                            </div>
+                            <div class="template-item" data-template="5">
+                                <img src="img/v6.jpg" alt="টেমপ্লেট ৬">
+                            </div>
+                            <div class="template-item" data-template="6">
+                                <img src="img/v7.jpg" alt="টেমপ্লেট ৭">
+                            </div>
+                            <div class="template-item" data-template="7">
+                                <img src="img/v8.jpg" alt="টেমপ্লেট ৮">
+                            </div>
+                            <div class="template-item" data-template="8">
+                                <img src="img/v9.jpg" alt="টেমপ্লেট ৯">
+                            </div>
+                            <div class="template-item" data-template="9">
+                                <img src="img/v10.jpg" alt="টেমপ্লেট ১০">
+                            </div>
+                            <div class="template-item" data-template="10">
+                                <img src="img/v11.jpg" alt="টেমপ্লেট ১১">
+                            </div>
+                            <div class="template-item" data-template="11">
+                                <img src="img/v12.jpg" alt="টেমপ্লেট ১২">
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <label for="userNote">আপনার নোট:</label>
-                    <textarea id="userNote" placeholder="আপনার নোট লিখুন" rows="2"></textarea>
-                    <small>নতুন লাইনের জন্য enter চাপুন এবং লিখুন</small>
-                    
-                    <!-- Text Customization Controls for Note -->
-                    <div class="text-customization">
-                        <div class="position-controls">
-                            <button type="button" class="position-btn" data-target="note" data-direction="up">⬆️</button>
-                            <button type="button" class="position-btn" data-target="note" data-direction="down">⬇️</button>
-                            <button type="button" class="position-btn" data-target="note" data-direction="left">⬅️</button>
-                            <button type="button" class="position-btn" data-target="note" data-direction="right">➡️</button>
+                <!-- RIGHT COLUMN: Input and Actions -->
+                <div class="column-right">
+                    <!-- Input Fields -->
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label for="userName">আপনার নাম:</label>
+                            <input type="text" id="userName" placeholder="আপনার নাম লিখুন">
+
+                            <!-- Text Customization Controls for Name -->
+                            <div class="text-customization">
+                                <div class="position-controls">
+                                    <button type="button" class="position-btn" data-target="name" data-direction="up">⬆️
+                                    </button>
+                                    <button type="button" class="position-btn" data-target="name" data-direction="down">⬇️
+                                    </button>
+                                    <button type="button" class="position-btn" data-target="name" data-direction="left">⬅️
+                                    </button>
+                                    <button type="button" class="position-btn" data-target="name" data-direction="right">➡️
+                                    </button>
+                                </div>
+                                <div class="size-controls">
+                                    <button type="button" class="size-btn" data-target="name" data-action="decrease">🔍-</button>
+                                    <button type="button" class="size-btn" data-target="name" data-action="increase">🔍+</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="size-controls">
-                            <button type="button" class="size-btn" data-target="note" data-action="decrease">🔍-</button>
-                            <button type="button" class="size-btn" data-target="note" data-action="increase">🔍+</button>
+
+                        <div class="input-group">
+                            <label for="userNote">আপনার নোট:</label>
+                            <textarea id="userNote" placeholder="আপনার নোট লিখুন" rows="2"></textarea>
+                            <small>নতুন লাইনের জন্য enter চাপুন এবং লিখুন</small>
+
+                            <!-- Text Customization Controls for Note -->
+                            <div class="text-customization">
+                                <div class="position-controls">
+                                    <button type="button" class="position-btn" data-target="note" data-direction="up">⬆️
+                                    </button>
+                                    <button type="button" class="position-btn" data-target="note" data-direction="down">⬇️
+                                    </button>
+                                    <button type="button" class="position-btn" data-target="note" data-direction="left">⬅️
+                                    </button>
+                                    <button type="button" class="position-btn" data-target="note" data-direction="right">➡️
+                                    </button>
+                                </div>
+                                <div class="size-controls">
+                                    <button type="button" class="size-btn" data-target="note" data-action="decrease">🔍-</button>
+                                    <button type="button" class="size-btn" data-target="note" data-action="increase">🔍+</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Action Buttons -->
-            <div class="action-buttons">
-                <button class="btn download-btn" id="downloadBtn">
-                    <span>📥</span> ডাউনলোড
-                </button>
-                <button class="btn share-btn" id="shareBtn">
-                    <span>📤</span> শেয়ার
-                </button>
+                    <!-- Action Buttons - Upgraded design -->
+                    <div class="action-buttons">
+                        <button class="btn download-btn" id="downloadBtn">
+                            <span class="btn-icon">📥</span>
+                            <span class="btn-text">ডাউনলোড</span>
+                        </button>
+                        <button class="btn share-btn" id="shareBtn">
+                            <span class="btn-icon">📤</span>
+                            <span class="btn-text">শেয়ার</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- Footer -->
