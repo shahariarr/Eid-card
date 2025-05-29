@@ -121,91 +121,85 @@ $(document).ready(function() {
         updateCard();
     });
 
-    // Download button
-    $('#downloadBtn').click(function() {
-        // Show loading state
-        const $btn = $(this);
-        $btn.prop('disabled', true);
-        $btn.html('<span>⏳</span> প্রস্তুত হচ্ছে...');
-
-        try {
-            // Get original image for dimensions
-            const originalImage = document.getElementById('templateImage');
-            const width = originalImage.naturalWidth;
-            const height = originalImage.naturalHeight;
-
-            // Create canvas with original dimensions
-            html2canvas(document.querySelector('.card-container'), {
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: null,
-                width: width,
-                height: height,
-                scale: 1,
-                imageTimeout: 0,
-                onclone: function(clonedDoc) {
-                    // Ensure text positioning matches display
-                    const clonedContainer = clonedDoc.querySelector('.card-container');
-                    const clonedName = clonedDoc.querySelector('#displayName');
-                    const clonedNote = clonedDoc.querySelector('#displayNote');
-                    
-                    // Maintain text styles
-                    clonedContainer.style.width = width + 'px';
-                    clonedContainer.style.height = height + 'px';
-                    
-                    // Apply current template colors
-                    const template = templates[currentTemplate];
-                    clonedName.style.color = template.textColor;
-                    clonedNote.style.color = template.noteColor;
-                }
-            }).then(function(canvas) {
-                // Convert to high quality PNG
-                const dataUrl = canvas.toDataURL('image/png', 1.0);
-                
-                // Create download link
-                const link = document.createElement('a');
-                link.download = 'eid-card.png';
-                link.href = dataUrl;
-                
-                // Trigger download
-                link.click();
-                
-                // Reset button state
-                $btn.prop('disabled', false);
-                $btn.html('<span>📥</span> ডাউনলোড');
-            });
-        } catch (error) {
-            console.error('Error:', error);
-            alert('দুঃখিত, ডাউনলোড করা যায়নি। আবার চেষ্টা করুন।');
-            
-            // Reset button state
-            $btn.prop('disabled', false);
-            $btn.html('<span>📥</span> ডাউনলোড');
+    // Initialize text position and size variables
+    let textSettings = {
+        name: {
+            top: 0,
+            left: 0,
+            size: 18
+        },
+        note: {
+            top: 0,
+            left: 0,
+            size: 14
         }
+    };
+
+    // Position adjustment buttons
+    $('.position-btn').click(function() {
+        const target = $(this).data('target');
+        const direction = $(this).data('direction');
+        const step = 5; // pixels to move
+        
+        switch(direction) {
+            case 'up':
+                textSettings[target].top -= step;
+                break;
+            case 'down':
+                textSettings[target].top += step;
+                break;
+            case 'left':
+                textSettings[target].left -= step;
+                break;
+            case 'right':
+                textSettings[target].left += step;
+                break;
+        }
+        
+        updateTextPosition(target);
+        updateCard();
     });
 
-    // Share button
-    $('#shareBtn').click(function() {
-        const userName = $('#userName').val();
-        const userNote = $('#userNote').val();
-        const templateName = templates[currentTemplate].name;
+    // Size adjustment buttons
+    $('.size-btn').click(function() {
+        const target = $(this).data('target');
+        const action = $(this).data('action');
+        const step = 1; // font size increment
         
-        const shareText = `ঈদ মোবারক! 🌙\n\n${userName ? userName + '\n' : ''}${userNote ? userNote + '\n' : ''}\nটেমপ্লেট: ${templateName}`;
+        if (action === 'increase') {
+            textSettings[target].size += step;
+        } else {
+            // Don't allow font size below 8px
+            if (textSettings[target].size > 8) {
+                textSettings[target].size -= step;
+            }
+        }
         
-        if (navigator.share) {
-            navigator.share({
-                title: 'ঈদ কার্ড',
-                text: shareText
+        updateTextSize(target);
+        updateCard();
+    });
+
+    // Update text position
+    function updateTextPosition(target) {
+        if (target === 'name') {
+            $('#displayName').css({
+                'transform': `translate(${textSettings.name.left}px, ${textSettings.name.top}px)`
             });
         } else {
-            // Fallback for browsers that don't support Web Share API
-            navigator.clipboard.writeText(shareText).then(function() {
-                alert('টেক্সট কপি করা হয়েছে! এখন আপনি যেকোনো জায়গায় পেস্ট করতে পারেন।');
-            }).catch(function() {
-                alert('শেয়ার ফিচার এই ব্রাউজারে সাপোর্ট করে না।');
+            $('#displayNote').css({
+                'transform': `translate(${textSettings.note.left}px, ${textSettings.note.top}px)`
             });
         }
-    });
+    }
+
+    // Update text size
+    function updateTextSize(target) {
+        if (target === 'name') {
+            $('#displayName').css('font-size', textSettings.name.size + 'px');
+        } else {
+            $('#displayNote').css('font-size', textSettings.note.size + 'px');
+        }
+    }
 
     // Update card function
     function updateCard() {
@@ -225,14 +219,18 @@ $(document).ready(function() {
                 .text(userName)
                 .css({
                     'color': template.textColor,
-                    'text-shadow': 'none'  // Remove text shadow
+                    'text-shadow': 'none',
+                    'font-size': textSettings.name.size + 'px',
+                    'transform': `translate(${textSettings.name.left}px, ${textSettings.name.top}px)`
                 });
 
             $('#displayNote')
                 .text(userNote)
                 .css({
                     'color': template.noteColor,
-                    'text-shadow': 'none'  // Remove text shadow
+                    'text-shadow': 'none',
+                    'font-size': textSettings.note.size + 'px',
+                    'transform': `translate(${textSettings.note.left}px, ${textSettings.note.top}px)`
                 });
 
             // Fade in
@@ -318,4 +316,97 @@ $(document).ready(function() {
             }
         }
     }
+
+    // Download button
+    $('#downloadBtn').click(function() {
+        // Show loading state
+        const $btn = $(this);
+        $btn.prop('disabled', true);
+        $btn.html('<span>⏳</span> প্রস্তুত হচ্ছে...');
+
+        try {
+            // Get original image for dimensions
+            const originalImage = document.getElementById('templateImage');
+            const width = originalImage.naturalWidth;
+            const height = originalImage.naturalHeight;
+
+            // Create canvas with original dimensions
+            html2canvas(document.querySelector('.card-container'), {
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null,
+                width: width,
+                height: height,
+                scale: 1,
+                imageTimeout: 0,
+                onclone: function(clonedDoc) {
+                    // Ensure text positioning matches display
+                    const clonedContainer = clonedDoc.querySelector('.card-container');
+                    const clonedName = clonedDoc.querySelector('#displayName');
+                    const clonedNote = clonedDoc.querySelector('#displayNote');
+                    
+                    // Maintain text styles
+                    clonedContainer.style.width = width + 'px';
+                    clonedContainer.style.height = height + 'px';
+                    
+                    // Apply current template colors
+                    const template = templates[currentTemplate];
+                    clonedName.style.color = template.textColor;
+                    clonedNote.style.color = template.noteColor;
+
+                    // Apply position and size settings
+                    clonedName.style.fontSize = textSettings.name.size + 'px';
+                    clonedName.style.transform = `translate(${textSettings.name.left}px, ${textSettings.name.top}px)`;
+                    
+                    clonedNote.style.fontSize = textSettings.note.size + 'px';
+                    clonedNote.style.transform = `translate(${textSettings.note.left}px, ${textSettings.note.top}px)`;
+                }
+            }).then(function(canvas) {
+                // Convert to high quality PNG
+                const dataUrl = canvas.toDataURL('image/png', 1.0);
+                
+                // Create download link
+                const link = document.createElement('a');
+                link.download = 'eid-card.png';
+                link.href = dataUrl;
+                
+                // Trigger download
+                link.click();
+                
+                // Reset button state
+                $btn.prop('disabled', false);
+                $btn.html('<span>📥</span> ডাউনলোড');
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            alert('দুঃখিত, ডাউনলোড করা যায়নি। আবার চেষ্টা করুন।');
+            
+            // Reset button state
+            $btn.prop('disabled', false);
+            $btn.html('<span>📥</span> ডাউনলোড');
+        }
+    });
+
+    // Share button
+    $('#shareBtn').click(function() {
+        const userName = $('#userName').val();
+        const userNote = $('#userNote').val();
+        const templateName = templates[currentTemplate].name;
+        
+        const shareText = `ঈদ মোবারক! 🌙\n\n${userName ? userName + '\n' : ''}${userNote ? userNote + '\n' : ''}\nটেমপ্লেট: ${templateName}`;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: 'ঈদ কার্ড',
+                text: shareText
+            });
+        } else {
+            // Fallback for browsers that don't support Web Share API
+            navigator.clipboard.writeText(shareText).then(function() {
+                alert('টেক্সট কপি করা হয়েছে! এখন আপনি যেকোনো জায়গায় পেস্ট করতে পারেন।');
+            }).catch(function() {
+                alert('শেয়ার ফিচার এই ব্রাউজারে সাপোর্ট করে না।');
+            });
+        }
+    });
 });

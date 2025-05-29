@@ -88,14 +88,40 @@
                 <div class="input-group">
                     <label for="userName">আপনার নাম:</label>
                     <input type="text" id="userName" placeholder="আপনার নাম লিখুন">
+                    
+                    <!-- Text Customization Controls for Name -->
+                    <div class="text-customization">
+                        <div class="position-controls">
+                            <button type="button" class="position-btn" data-target="name" data-direction="up">⬆️</button>
+                            <button type="button" class="position-btn" data-target="name" data-direction="down">⬇️</button>
+                            <button type="button" class="position-btn" data-target="name" data-direction="left">⬅️</button>
+                            <button type="button" class="position-btn" data-target="name" data-direction="right">➡️</button>
+                        </div>
+                        <div class="size-controls">
+                            <button type="button" class="size-btn" data-target="name" data-action="decrease">🔍-</button>
+                            <button type="button" class="size-btn" data-target="name" data-action="increase">🔍+</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="input-group">
                     <label for="userNote">আপনার নোট:</label>
                     <textarea id="userNote" placeholder="আপনার নোট লিখুন" rows="2"></textarea>
                     <small>নতুন লাইনের জন্য enter চাপুন এবং লিখুন</small>
-
-
+                    
+                    <!-- Text Customization Controls for Note -->
+                    <div class="text-customization">
+                        <div class="position-controls">
+                            <button type="button" class="position-btn" data-target="note" data-direction="up">⬆️</button>
+                            <button type="button" class="position-btn" data-target="note" data-direction="down">⬇️</button>
+                            <button type="button" class="position-btn" data-target="note" data-direction="left">⬅️</button>
+                            <button type="button" class="position-btn" data-target="note" data-direction="right">➡️</button>
+                        </div>
+                        <div class="size-controls">
+                            <button type="button" class="size-btn" data-target="note" data-action="decrease">🔍-</button>
+                            <button type="button" class="size-btn" data-target="note" data-action="increase">🔍+</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
