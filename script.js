@@ -214,14 +214,14 @@ $(document).ready(function() {
                 $('#templateImage').attr('src', template.image).show();
                 $('#cardContainer').css('background', 'none');
             }
-
             $('#displayName')
                 .text(userName)
                 .css({
                     'color': template.textColor,
                     'text-shadow': 'none',
                     'font-size': textSettings.name.size + 'px',
-                    'transform': `translate(${textSettings.name.left}px, ${textSettings.name.top}px)`
+                    'transform': `translate(${textSettings.name.left}px, ${textSettings.name.top}px)`,
+                    'font-family': 'Ekushey Aloucik 16-11-2018'
                 });
 
             $('#displayNote')
@@ -230,7 +230,8 @@ $(document).ready(function() {
                     'color': template.noteColor,
                     'text-shadow': 'none',
                     'font-size': textSettings.note.size + 'px',
-                    'transform': `translate(${textSettings.note.left}px, ${textSettings.note.top}px)`
+                    'transform': `translate(${textSettings.note.left}px, ${textSettings.note.top}px)`,
+                    'font-family': 'Ekushey Aloucik 16-11-2018'
                 });
 
             // Fade in
