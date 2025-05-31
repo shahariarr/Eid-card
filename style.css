@@ -348,6 +348,15 @@ body {
     transform: translateY(-2px);
 }
 
+.settings-btn {
+    background-color: #5a67d8;
+    border-color: #4c51bf;
+}
+
+.settings-btn:hover {
+    background-color: #4c51bf;
+}
+
 /* Footer */
 .footer {
     text-align: center;

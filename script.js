@@ -239,6 +239,38 @@ $(document).ready(function() {
         });
     }
 
+    // Add settings export functionality
+    $('#saveSettingsBtn').click(function() {
+        // Prepare settings object with current values
+        const settingsToExport = {
+            template: currentTemplate,
+            textSettings: textSettings
+        };
+        
+        // Convert settings to JSON string
+        const settingsJSON = JSON.stringify(settingsToExport, null, 2);
+        
+        // Create blob from JSON
+        const blob = new Blob([settingsJSON], { type: 'application/json' });
+        
+        // Create download link
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'eid-card-settings.json';
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        
+        // Clean up
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        
+        // Show confirmation
+        alert('সেটিংস সংরক্ষণ করা হয়েছে!');
+    });
+
     // Update template selection
     function updateTemplateSelection() {
         $('.template-item').removeClass('active');
