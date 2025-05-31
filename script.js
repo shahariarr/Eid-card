@@ -100,6 +100,10 @@ $(document).ready(function() {
         $('.template-item').removeClass('active');
         $(this).addClass('active');
         
+        // Reset custom colors when switching templates
+        customColors.name = null;
+        customColors.note = null;
+        
         updateCard();
     });
 
@@ -201,6 +205,18 @@ $(document).ready(function() {
         }
     }
 
+    // Color picker change events
+    let customColors = {
+        name: null,
+        note: null
+    };
+
+    $('.color-picker').on('input', function() {
+        const target = $(this).data('target');
+        customColors[target] = $(this).val();
+        updateCard();
+    });
+
     // Update card function
     function updateCard() {
         const template = templates[currentTemplate];
@@ -214,10 +230,19 @@ $(document).ready(function() {
                 $('#templateImage').attr('src', template.image).show();
                 $('#cardContainer').css('background', 'none');
             }
+            
+            // Use custom colors if set, otherwise use template colors
+            const nameColor = customColors.name || template.textColor;
+            const noteColor = customColors.note || template.noteColor;
+            
+            // Set initial color pickers to match template colors when template changes
+            $('#nameColorPicker').val(nameColor);
+            $('#noteColorPicker').val(noteColor);
+            
             $('#displayName')
                 .text(userName)
                 .css({
-                    'color': template.textColor,
+                    'color': nameColor,
                     'text-shadow': 'none',
                     'font-size': textSettings.name.size + 'px',
                     'transform': `translate(${textSettings.name.left}px, ${textSettings.name.top}px)`,
@@ -227,7 +252,7 @@ $(document).ready(function() {
             $('#displayNote')
                 .text(userNote)
                 .css({
-                    'color': template.noteColor,
+                    'color': noteColor,
                     'text-shadow': 'none',
                     'font-size': textSettings.note.size + 'px',
                     'transform': `translate(${textSettings.note.left}px, ${textSettings.note.top}px)`,
@@ -244,7 +269,8 @@ $(document).ready(function() {
         // Prepare settings object with current values
         const settingsToExport = {
             template: currentTemplate,
-            textSettings: textSettings
+            textSettings: textSettings,
+            customColors: customColors
         };
         
         // Convert settings to JSON string
@@ -386,10 +412,10 @@ $(document).ready(function() {
                     clonedContainer.style.width = (width / 3) + 'px';
                     clonedContainer.style.height = (height / 3) + 'px';
                     
-                    // Apply current template colors
+                    // Apply current template colors or custom colors
                     const template = templates[currentTemplate];
-                    clonedName.style.color = template.textColor;
-                    clonedNote.style.color = template.noteColor;
+                    clonedName.style.color = customColors.name || template.textColor;
+                    clonedNote.style.color = customColors.note || template.noteColor;
                     
                     // Apply position and size settings
                     clonedName.style.fontSize = textSettings.name.size + 'px';

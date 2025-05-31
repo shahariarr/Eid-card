@@ -98,19 +98,22 @@
 
                             <!-- Text Customization Controls for Name -->
                             <div class="text-customization">
+                                <!-- Replace the position buttons with these -->
                                 <div class="position-controls">
-                                    <button type="button" class="position-btn" data-target="name" data-direction="up">⬆️
-                                    </button>
-                                    <button type="button" class="position-btn" data-target="name" data-direction="down">⬇️
-                                    </button>
-                                    <button type="button" class="position-btn" data-target="name" data-direction="left">⬅️
-                                    </button>
-                                    <button type="button" class="position-btn" data-target="name" data-direction="right">➡️
-                                    </button>
+                                    <button type="button" class="position-btn" data-target="name" data-direction="up"></button>
+                                    <button type="button" class="position-btn" data-target="name" data-direction="down"></button>
+                                    <button type="button" class="position-btn" data-target="name" data-direction="left"></button>
+                                    <button type="button" class="position-btn" data-target="name" data-direction="right"></button>
                                 </div>
+
+                                <!-- Replace the size buttons with these -->
                                 <div class="size-controls">
-                                    <button type="button" class="size-btn" data-target="name" data-action="decrease">🔍-</button>
-                                    <button type="button" class="size-btn" data-target="name" data-action="increase">🔍+</button>
+                                    <button type="button" class="size-btn" data-target="name" data-action="increase"></button>
+                                    <button type="button" class="size-btn" data-target="name" data-action="decrease"></button>
+                                </div>
+                                <div class="color-control">
+                                    <input type="color" id="nameColorPicker" class="color-picker" data-target="name">
+                                    <label for="nameColorPicker">কালার</label>
                                 </div>
                             </div>
                         </div>
@@ -123,18 +126,22 @@
                             <!-- Text Customization Controls for Note -->
                             <div class="text-customization">
                                 <div class="position-controls">
-                                    <button type="button" class="position-btn" data-target="note" data-direction="up">⬆️
+                                    <button type="button" class="position-btn" data-target="note" data-direction="up">
                                     </button>
-                                    <button type="button" class="position-btn" data-target="note" data-direction="down">⬇️
+                                    <button type="button" class="position-btn" data-target="note" data-direction="down">
                                     </button>
-                                    <button type="button" class="position-btn" data-target="note" data-direction="left">⬅️
+                                    <button type="button" class="position-btn" data-target="note" data-direction="left">
                                     </button>
-                                    <button type="button" class="position-btn" data-target="note" data-direction="right">➡️
+                                    <button type="button" class="position-btn" data-target="note" data-direction="right">
                                     </button>
                                 </div>
                                 <div class="size-controls">
-                                    <button type="button" class="size-btn" data-target="note" data-action="decrease">🔍-</button>
-                                    <button type="button" class="size-btn" data-target="note" data-action="increase">🔍+</button>
+                                    <button type="button" class="size-btn" data-target="note" data-action="decrease"></button>
+                                    <button type="button" class="size-btn" data-target="note" data-action="increase"></button>
+                                </div>
+                                <div class="color-control">
+                                    <input type="color" id="noteColorPicker" class="color-picker" data-target="note">
+                                    <label for="noteColorPicker">কালার</label>
                                 </div>
                             </div>
                         </div>
