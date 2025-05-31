@@ -755,3 +755,110 @@ body {
 .share-button:hover::after {
   height: 60%;
 }
+
+/* Template slider styles */
+.template-slider {
+    width: 100%;
+    margin: 1rem 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.slider-btn {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.slider-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+#templateCounter {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.template-carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 0 0.5rem;
+}
+
+.template-slider-container {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: 0.5rem;
+}
+
+.template-slider-container .template-item {
+    min-width: calc(33.33% - 0.5rem);
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+.template-slider-container .template-item img {
+    width: 100%;
+    /* height: auto; */
+    display: block;
+    border-radius: 8px;
+}
+
+.template-slider-container .template-item.active {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.template-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.template-item:hover .template-name {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .template-slider-container .template-item {
+        min-width: calc(30% - 0.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .template-slider-container .template-item {
+        min-width: calc(30% - 0.5rem);
+    }
+}

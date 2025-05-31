@@ -493,4 +493,106 @@ $(document).ready(function() {
             });
         }
     });
+
+    // Template slider functionality
+    $(document).ready(function() {
+        // Variables for slider
+        let currentSlide = 0;
+        const slidesCount = $('.template-item').length;
+        let visibleSlides = getVisibleSlides();
+        let maxSlideIndex = slidesCount - visibleSlides;
+        
+        // Initialize slider
+        updateTemplateCounter();
+        
+        // Get number of visible slides based on screen width
+        function getVisibleSlides() {
+            if (window.innerWidth <= 480) return 1;
+            if (window.innerWidth <= 768) return 2;
+            return 3;
+        }
+        
+        // Update slider position
+        function updateSliderPosition() {
+            const slideWidth = $('.template-item').outerWidth(true);
+            $('.template-slider-container').css('transform', `translateX(-${currentSlide * slideWidth}px)`);
+        }
+        
+        // Update template counter display
+        function updateTemplateCounter() {
+            $('#templateCounter').text(`${currentTemplate + 1}/${slidesCount}`);
+        }
+        
+        // Slider buttons
+        $('#sliderPrevBtn').click(function() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSliderPosition();
+            }
+        });
+        
+        $('#sliderNextBtn').click(function() {
+            if (currentSlide < maxSlideIndex) {
+                currentSlide++;
+                updateSliderPosition();
+            }
+        });
+        
+        // Update visible slides count when window is resized
+        $(window).resize(function() {
+            const newVisibleSlides = getVisibleSlides();
+            if (visibleSlides !== newVisibleSlides) {
+                visibleSlides = newVisibleSlides;
+                maxSlideIndex = slidesCount - visibleSlides;
+                if (currentSlide > maxSlideIndex) {
+                    currentSlide = maxSlideIndex;
+                    updateSliderPosition();
+                }
+            }
+        });
+        
+        // Template selection - modify the existing click handler
+        $('.template-item').click(function() {
+            const templateId = parseInt($(this).data('template'));
+            currentTemplate = templateId;
+            
+            $('.template-item').removeClass('active');
+            $(this).addClass('active');
+            
+            // Reset custom colors when switching templates
+            customColors.name = null;
+            customColors.note = null;
+            
+            // Update template counter
+            updateTemplateCounter();
+            
+            updateCard();
+        });
+        
+        // Modify the existing updateTemplateSelection function
+        function updateTemplateSelection() {
+            $('.template-item').removeClass('active');
+            const $activeTemplate = $(`.template-item[data-template="${currentTemplate}"]`);
+            $activeTemplate.addClass('active');
+            
+            // Calculate which slide contains the active template
+            const slideWidth = $('.template-item').outerWidth(true);
+            const activeIndex = $activeTemplate.index();
+            
+            // Adjust current slide to make the active template visible
+            if (activeIndex < currentSlide) {
+                currentSlide = activeIndex;
+            } else if (activeIndex >= currentSlide + visibleSlides) {
+                currentSlide = Math.min(activeIndex - visibleSlides + 1, maxSlideIndex);
+            }
+            
+            updateSliderPosition();
+            updateTemplateCounter();
+        }
+        
+        // Update the existing navigation buttons to include slider update
+        $('#prevBtn, #nextBtn').click(function() {
+            updateTemplateCounter();
+        });
+    });
 });
