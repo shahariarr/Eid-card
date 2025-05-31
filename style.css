@@ -449,3 +449,100 @@ body {
     display: flex;
     gap: 5px;
 }
+/* Button styles from UIverse.io */
+.download-button, .share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Ekushey Aloucik 16-11-2018', 'Noto Sans Bengali', 'Kalpurush', 'SolaimanLipi', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  padding: 12px 20px;
+  color: white;
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em rgba(59, 48, 78, 0.527);
+  letter-spacing: 0.05em;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.download-button {
+  background: rgb(103, 92, 156);
+}
+
+.share-button {
+  background: rgb(59, 130, 246);
+}
+
+.download-button svg, .share-button svg {
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+}
+
+.download-button:hover, .share-button:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em rgba(88, 71, 116, 0.627);
+  transform: translateY(-2px);
+}
+
+.download-button:active, .share-button:active {
+  box-shadow: 0 0.3em 1em -0.5em rgba(88, 71, 116, 0.627);
+  transform: translateY(0);
+}
+
+.download-button::before, .share-button::before {
+  content: "";
+  width: 4px;
+  height: 40%;
+  background-color: white;
+  position: absolute;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  left: 0;
+  transition: all 0.2s;
+}
+
+.download-button::after, .share-button::after {
+  content: "";
+  width: 4px;
+  height: 40%;
+  background-color: white;
+  position: absolute;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  right: 0;
+  transition: all 0.2s;
+}
+
+.download-button:hover::before,
+.download-button:hover::after,
+.share-button:hover::before,
+.share-button:hover::after {
+  height: 60%;
+}
+
+/* You can remove these older button styles or comment them out */
+/*
+.download-btn, .share-btn {
+    background: #374151;
+    color: white;
+}
+
+.download-btn:hover {
+    background: #1f2937;
+    transform: translateY(-2px);
+}
+
+.share-btn {
+    background: #3b82f6;
+    color: white;
+}
+
+.share-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}
+*/

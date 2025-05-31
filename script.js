@@ -358,49 +358,74 @@ $(document).ready(function() {
         $btn.html('<span>⏳</span> প্রস্তুত হচ্ছে...');
 
         try {
-            // Get original image for dimensions
-            const originalImage = document.getElementById('templateImage');
-            const width = 360;
-            const height = 400;
-
-            // Create canvas with original dimensions
-            html2canvas(document.querySelector('.card-container'), {
+            // Higher resolution dimensions
+            const width = 1080;  // 3x the display width
+            const height = 1200; // 3x the display height
+            
+            // Get the card container element
+            const cardContainer = document.querySelector('.card-container');
+            
+            // Create canvas with higher resolution dimensions
+            html2canvas(cardContainer, {
                 useCORS: true,
                 allowTaint: true,
                 backgroundColor: null,
-                width: width,
-                height: height,
-                scale: 1,
+                width: width / 3,  // Original width (scaled up later)
+                height: height / 3, // Original height (scaled up later)
+                scale: 3,           // Higher scale factor for better quality
                 imageTimeout: 0,
+                logging: false,
+                renderScale: 2,     // Additional rendering scale
                 onclone: function(clonedDoc) {
                     // Ensure text positioning matches display
                     const clonedContainer = clonedDoc.querySelector('.card-container');
                     const clonedName = clonedDoc.querySelector('#displayName');
                     const clonedNote = clonedDoc.querySelector('#displayNote');
                     
-                    // Maintain text styles
-                    clonedContainer.style.width = width + 'px';
-                    clonedContainer.style.height = height + 'px';
+                    // Maintain text styles with enhanced rendering
+                    clonedContainer.style.width = (width / 3) + 'px';
+                    clonedContainer.style.height = (height / 3) + 'px';
                     
                     // Apply current template colors
                     const template = templates[currentTemplate];
                     clonedName.style.color = template.textColor;
                     clonedNote.style.color = template.noteColor;
-
+                    
                     // Apply position and size settings
                     clonedName.style.fontSize = textSettings.name.size + 'px';
                     clonedName.style.transform = `translate(${textSettings.name.left}px, ${textSettings.name.top}px)`;
+                    clonedName.style.textRendering = 'optimizeLegibility';
+                    clonedName.style.fontSmooth = 'always';
+                    clonedName.style.webkitFontSmoothing = 'antialiased';
                     
                     clonedNote.style.fontSize = textSettings.note.size + 'px';
                     clonedNote.style.transform = `translate(${textSettings.note.left}px, ${textSettings.note.top}px)`;
+                    clonedNote.style.textRendering = 'optimizeLegibility';
+                    clonedNote.style.fontSmooth = 'always';
+                    clonedNote.style.webkitFontSmoothing = 'antialiased';
                 }
             }).then(function(canvas) {
-                // Convert to high quality PNG
-                const dataUrl = canvas.toDataURL('image/png', 1.0);
+                // Create a high-resolution canvas
+                const hdCanvas = document.createElement('canvas');
+                const hdContext = hdCanvas.getContext('2d');
+                
+                // Set HD canvas dimensions
+                hdCanvas.width = width;
+                hdCanvas.height = height;
+                
+                // Enable image smoothing for better quality
+                hdContext.imageSmoothingEnabled = true;
+                hdContext.imageSmoothingQuality = 'high';
+                
+                // Draw the original canvas onto the HD canvas, scaling it up
+                hdContext.drawImage(canvas, 0, 0, width, height);
+                
+                // Convert to highest quality PNG
+                const dataUrl = hdCanvas.toDataURL('image/png', 1.0);
                 
                 // Create download link
                 const link = document.createElement('a');
-                link.download = 'eid-card.png';
+                link.download = 'eid-card-hd.png';
                 link.href = dataUrl;
                 
                 // Trigger download
@@ -408,7 +433,7 @@ $(document).ready(function() {
                 
                 // Reset button state
                 $btn.prop('disabled', false);
-                $btn.html('<span>📥</span> ডাউনলোড');
+                $btn.html('<svg xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" fill="white"></path></svg><span>ডাউনলোড</span>');
             });
         } catch (error) {
             console.error('Error:', error);
@@ -416,7 +441,7 @@ $(document).ready(function() {
             
             // Reset button state
             $btn.prop('disabled', false);
-            $btn.html('<span>📥</span> ডাউনলোড');
+            $btn.html('<svg xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512"><path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-167l80 80c9.4 9.4 24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-39 39V184c0-13.3-10.7-24-24-24s-24 10.7-24 24V318.1l-39-39c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9z" fill="white"></path></svg><span>ডাউনলোড</span>');
         }
     });
 
